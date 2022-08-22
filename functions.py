@@ -47,7 +47,7 @@ def new_user_reg(username, password):
     try:
         conn = sqlite3.connect('wiigolf.db')
     except:
-        return 0
+        return "Failed to connect to database - try again."
     c = conn.cursor()
     execute_string = f"SELECT * FROM ACCOUNTS WHERE UNAME = '{username}'"
     c.execute(execute_string)
@@ -56,14 +56,14 @@ def new_user_reg(username, password):
         conn.execute(entry_string)
         conn.commit()
         conn.close()
-        return 1
-    return 0
+        return 'SUCCESS'
+    return "Username taken - try a different one"
 
 def user_login(username, password):
     try:
         conn = sqlite3.connect('wiigolf.db')
     except:
-        return 0
+        return "Failed to connect to database - try again."
 
     c = conn.cursor()
     execute_string = f"SELECT * FROM ACCOUNTS WHERE UNAME = '{username}'"
@@ -71,11 +71,34 @@ def user_login(username, password):
     data = c.fetchall()
     if len(data) == 0:
         conn.close()
-        return 0
-    print(data)
+        return "Incorrect username or password."
     if str(password) == str(data[0][1]):
         conn.close()
-        return 1
+        return "SUCCESS"
     conn.close()
-    return 0
+    return "Incorrect username or password."
+
+def get_player_data(pname):
+    try:
+        conn = sqlite3.connect('wiigolf.db')
+    except:
+        return []
+    c = conn.cursor()
+    execute_string = f"SELECT * FROM PLAYERS WHERE PNAME = '{pname}'"
+    c.execute(execute_string)
+    data = c.fetchall()
+    if len(data) == 0:
+        conn.close()
+        return []
+    conn.close()
+    stats = ['Average']
+    for j in range(19):
+        tmp = 0
+        for i in range(len(data)):
+            tmp = tmp + data[i][j+1]
+        tmp = tmp / len(data)
+        stats = stats + [format(tmp, '.2f')]
+    data = data + [tuple(stats)]
+
+    return data
 

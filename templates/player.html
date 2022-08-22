@@ -1,0 +1,86 @@
+{% extends "header.html" %}
+{% block content %}
+<style>
+td {
+	width: 150.px;
+	text-align: center;
+	border: 1px solid black;
+	padding: 5px;
+}
+</style>
+<h1> {{ data[0][0] }}'s Stats</h1>
+<table style="text-align:center; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th>Hole:</th>
+<th> 1 </th>
+<th> 2 </th>
+<th> 3 </th>
+<th> 4 </th>
+<th> 5 </th>
+<th> 6 </th>
+<th> 7 </th>
+<th> 8 </th>
+<th> 9 </th>
+<th> 10 </th>
+<th> 11 </th>
+<th> 12 </th>
+<th> 13 </th>
+<th> 14 </th>
+<th> 15 </th>
+<th> 16 </th>
+<th> 17 </th>
+<th> 18 </th>
+<th> Total </th>
+</tr>
+<tr>
+	<th>Par:</th>
+	<th> 4 </th>
+	<th> 3 </th>
+	<th> 5 </th>
+	<th> 3 </th>
+	<th> 5 </th>
+	<th> 4 </th>
+	<th> 4 </th>
+	<th> 3 </th>
+	<th> 5 </th>
+	<th> 4 </th>
+	<th> 3 </th>
+	<th> 5 </th>
+	<th> 3 </th>
+	<th> 5 </th>
+	<th> 4 </th>
+	<th> 4 </th>
+	<th> 3 </th>
+	<th> 5 </th>
+	<th> 72 </th>
+</tr>
+</thead>
+<tbody>
+{% for row in data %}
+	<tr>
+		<td>{{row[0]}}</td>
+		<td>{{row[1]}}</td>
+		<td>{{row[2]}}</td>
+		<td>{{row[3]}}</td>
+		<td>{{row[4]}}</td>
+		<td>{{row[5]}}</td>
+		<td>{{row[6]}}</td>
+		<td>{{row[7]}}</td>
+		<td>{{row[8]}}</td>
+		<td>{{row[9]}}</td>
+		<td>{{row[10]}}</td>
+		<td>{{row[11]}}</td>
+		<td>{{row[12]}}</td>
+		<td>{{row[13]}}</td>
+		<td>{{row[14]}}</td>
+		<td>{{row[15]}}</td>
+		<td>{{row[16]}}</td>
+		<td>{{row[17]}}</td>
+		<td>{{row[18]}}</td>
+		<td>{{row[19]}}</td>
+	</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
