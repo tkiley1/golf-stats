@@ -46,7 +46,8 @@ def get_match_data():
 def new_user_reg(username, password):
     try:
         conn = sqlite3.connect('wiigolf.db')
-    except:
+    except Error as e:
+        print(e)
         return "Failed to connect to database - try again."
     c = conn.cursor()
     execute_string = f"SELECT * FROM ACCOUNTS WHERE UNAME = '{username}'"
@@ -102,3 +103,32 @@ def get_player_data(pname):
 
     return data
 
+def insert_player_data(player,h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,tscore):
+    #TODO: Create better validation of scores
+    
+    values = [h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18]
+    total = 0
+    for i in values:
+        if i == 0:
+            return 0
+        total = total + i
+    if total != tscore:
+        return 0
+    try:
+            conn = sqlite3.connect('wiigolf.db')
+    except Error as e:
+            print(e)
+            return 0
+    c = conn.cursor()
+    execute_string = f"INSERT INTO PLAYERS (PNAME,h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,SCORE) values ('{player}',{h1},{h2},{h3},{h4},{h5},{h6},{h7},{h8},{h9},{h10},{h11},{h12},{h13},{h14},{h15},{h16},{h17},{h18},{tscore})"
+    try:
+        c.execute(execute_string)
+    except Error as e:
+        print(e)
+        conn.close()
+        return 0
+    conn.commit()
+    conn.close()
+
+
+    return 1
