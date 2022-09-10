@@ -15,7 +15,7 @@ app.config['SECRET_KEY'] = "Wii Golf"
 def hello():
     if "user" not in session:
         return redirect('login')
-    return render_template('home.html', data = get_match_data())
+    return render_template('home.html', data = get_match_data(), averages=get_all_average_rounds())
 
     #return str(get_match_data())
 

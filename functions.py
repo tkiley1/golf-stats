@@ -132,3 +132,48 @@ def insert_player_data(player,h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15
 
 
     return 1
+
+def get_average_round(player):
+#TODO write function to update the average score within the database
+    try:
+        conn = sqlite3.connect('wiigolf.db')
+    except Error as e:
+        print(e)
+        return []
+    c = conn.cursor()
+    execute_string = f"Select SCORE FROM PLAYERS WHERE PNAME = '{player}'"
+    c.execute(execute_string)
+    data = c.fetchall()
+    if data == []:
+        conn.close()
+        return data
+    avg = 0
+    for i in data:
+        avg = avg + i[0]
+    avg = avg/len(data)
+    conn.close
+
+    return avg
+
+def connect_db():
+    try:
+        conn = sqlite3.connect('wiigolf.db')
+    except Error as e:
+        print(e)
+        return None
+    return conn
+
+def get_all_average_rounds():
+##TODO write function to get data from database
+    conn = connect_db()
+    if conn == None:
+        return {}
+    c = conn.cursor()
+    execute_string = f"SELECT DISTINCT PNAME FROM PLAYERS"
+    c.execute(execute_string)
+    data = c.fetchall()
+    averages = {}
+    for pname in data:
+        averages[pname[0]] = get_average_round(pname[0])
+    return averages
+
