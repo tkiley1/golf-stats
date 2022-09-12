@@ -1,0 +1,74 @@
+{% extends "header.html" %}
+{% block content %}
+
+<p style = "text-align: center; color: red;">{{message}}</p>
+<h1 style = "text-align: center;">Input Score</h1>
+<form style = "text-align: center;", action="", method="post">
+	<div class="form-row">
+	{{ form.csrf_token }}
+
+	<table style = "text-align:center; margin-left: auto; margin-right: auto; width: 100%;" class="table table-dark table-sm">
+		<thead>
+			<tr>
+				<th>Hole:</th>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+				<th>5</th>
+				<th>6</th>
+				<th>7</th>
+				<th>8</th>
+				<th>9</th>
+				<th>10</th>
+				<th>11</th>
+				<th>12</th>
+				<th>13</th>
+				<th>14</th>
+				<th>15</th>
+				<th>16</th>
+				<th>17</th>
+				<th>18</th>
+				<th>Total</th>
+			</tr>
+		</thead>
+		<tr>
+			<td> </td>
+			<td>{{form.h1(style='width:30px;',value=4)}}</td>
+			<td>{{form.h2(style='width:30px;',value=3)}}</td>
+			<td>{{form.h3(style='width:30px;',value=5)}}</td>
+			<td>{{form.h4(style='width:30px;',value=3)}}</td>
+			<td>{{form.h5(style='width:30px;',value=5)}}</td>
+			<td>{{form.h6(style='width:30px;',value=4)}}</td>
+			<td>{{form.h7(style='width:30px;',value=4)}}</td>
+			<td>{{form.h8(style='width:30px;',value=3)}}</td>
+			<td>{{form.h9(style='width:30px;',value=5)}}</td>
+			<td>{{form.h10(style='width:30px;',value=4)}}</td>
+			<td>{{form.h11(style='width:30px;',value=3)}}</td>
+			<td>{{form.h12(style='width:30px;',value=5)}}</td>
+			<td>{{form.h13(style='width:30px;',value=3)}}</td>
+			<td>{{form.h14(style='width:30px;',value=5)}}</td>
+			<td>{{form.h15(style='width:30px;',value=4)}}</td>
+			<td>{{form.h16(style='width:30px;',value=4)}}</td>
+			<td>{{form.h17(style='width:30px;',value=3)}}</td>
+			<td>{{form.h18(style='width:30px;',value=4)}}</td>
+			<td>{{form.tscore(style='width:50px;',value=72)}}</td>
+		</tr>
+
+	</table>
+	<p>{{form.submit()}}</p>
+	
+
+
+	{% if form.errors %}
+	<ul class="errors">
+		{% for error in form.errors %}
+			<li>{{ error }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+</div>
+		
+</form>
+
+{% endblock %}
