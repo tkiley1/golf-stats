@@ -1,5 +1,6 @@
 import sqlite3
 import hashlib
+import statistics
 
 def get_match_data():
     conn = sqlite3.connect('wiigolf.db')
@@ -92,13 +93,18 @@ def get_player_data(pname):
         return []
     conn.close()
     stats = ['Average']
+    volatility = ['Consistency Factor']
     for j in range(19):
         tmp = 0
+        lst = []
         for i in range(len(data)):
             tmp = tmp + data[i][j+1]
+            lst = lst + [data[i][j+1]]
         tmp = tmp / len(data)
+        vol = statistics.stdev(lst)
+        volatility = volatility + [format(vol, '.2f')]
         stats = stats + [format(tmp, '.2f')]
-    data = data + [tuple(stats)]
+    data = data + [tuple(stats)] + [tuple(volatility)]
 
     return data
 
